@@ -1,0 +1,105 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+        function checkAll(myCheckbox) {
+            let checkboxes = document.querySelectorAll("input[type='checkbox']");
+
+            if (myCheckbox.checked === true) {
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.checked = true;
+                });
+            } else {
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.checked = false;
+                });
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="topnav">
+        <a href="/">Page</a>
+        <a href="/share">Share</a>
+        <a href="/img">Post Ảnh</a>
+        <a class="active" href="/video">post Video</a>
+    </div>
+    <form action="/post-video" method="POST" enctype="multipart/form-data">
+        <div>
+            <input type="text" name="title" placeholder="Tiêu đề">
+        </div>
+        <div>
+            <input type="text" name="linkshare" placeholder="Link">
+        </div>
+        <div>
+            <label>Upload video</label>
+            <input type="file" name="file_video" />
+        </div>
+        <div>
+            <button type="submit">Post Share</button>
+        </div>
+        <div>
+            <input type="checkbox" id="option-all" onchange="checkAll(this)">
+            <label for="option-all">Select All</label>
+        </div>
+        <table class="w3-table-all w3-hoverable">
+            <thead>
+                <tr class="w3-light-grey">
+                    <th>STT</th>
+                    <th>ID Page</th>
+                    <th>Page</th>
+                    <th>Like page</th>
+                    <th>Tương tác ngày</th>
+                    <th>Tương tác tuần</th>
+                    <th>Tương tác tháng</th>
+                    <th>Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% let stt=1; %>
+                    <% danhsachpage.forEach(itempage=> { %>
+                        <tr>
+                            <td>
+                                <%= stt %>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="checkboxes" id="<%= stt %>" value="<%= itempage.id %>">
+                                <label for="<%= stt %>">
+                                    <%= itempage.id %>
+                                </label>
+                            </td>
+                            <td>
+                                <a href="https://www.facebook.com/<%= itempage.id %> " target="_blank">
+                                    <%= itempage.name %>
+                                </a>
+                            </td>
+                            <td>
+                                <%= itempage.fan_count %>
+                            </td>
+                            <td>
+                                <%= itempage.valueDay %>
+                            </td>
+                            <td>
+                                <%= itempage.valueWeek %>
+                            </td>
+                            <td>
+                                <%= itempage.valueDays28 %>
+                            </td>
+                            <td>
+                                <%= itempage.is_published %>
+                            </td>
+                        </tr>
+                        <% stt++; %>
+                            <% }); %>
+            </tbody>
+        </table>
+    </form>
+</body>
+
+</html>

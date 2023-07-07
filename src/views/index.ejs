@@ -1,0 +1,54 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div>
+        <div class="topnav">
+            <a class="active" href="/">Page</a>
+            <a href="/share">Share</a>
+            <a href="/img">Post Ảnh</a>
+            <a href="/video">post Video</a>
+        </div>
+        <form action="/get-token" method="POST">
+            <div>
+                <input type="text" name="token" placeholder="Nhap token">
+            </div>
+            <div>
+                <button type="submit">GET Token</button>
+            </div>
+        </form>
+    </div>
+    <div class="w3-container">
+        <h2>List User</h2>
+        <table class="w3-table-all w3-hoverable">
+            <thead>
+                <tr class="w3-light-grey">
+                    <th>id</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% danhsach.forEach(item=> { %>
+                    <tr>
+                        <td>
+                            <%= item.id %>
+                        </td>
+                        <td>
+                            <%= item.name %>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
